@@ -1,7 +1,6 @@
 // MAHASISWA 4 – INTEGRATOR
 // Tugas: Ambil data dari Vendor A, B, C → Normalisasi → Gabungkan → Kirim JSON standar
 
-const express = require("express");
 const fetch = require("node-fetch");
 require("dotenv").config();
 
