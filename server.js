@@ -74,6 +74,11 @@ function fromVendorC(item) {
 
 app.get("/products", async (req, res) => {
   try {
+    // TEST: cek apakah ENV terbaca di Vercel
+    console.log("URL A:", VENDOR_A);
+    console.log("URL B:", VENDOR_B);
+    console.log("URL C:", VENDOR_C);
+
     const dataA = await fetch(VENDOR_A).then(r => r.json());
     const dataB = await fetch(VENDOR_B).then(r => r.json());
     const dataC = await fetch(VENDOR_C).then(r => r.json());
