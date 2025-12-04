@@ -75,12 +75,12 @@ function fromVendorC(item) {
 app.get("/products", async (req, res) => {
   try {
     // TEST: cek apakah ENV terbaca di Vercel
-    console.log("Fetch A:", VENDOR_A);
-    const resA = await fetch(VENDOR_A);
-    console.log("Status A:", resA.status);
+    console.log("Fetch B:", VENDOR_B);
+    const resA = await fetch(VENDOR_B);
+    console.log("Status B:", resB.status);
 
-    const textA = await resA.text();
-    console.log("Raw Text A:", textA); // => keliatan beneran JSON atau HTML
+    const textA = await resB.text();
+    console.log("Raw Text B:", textB); // => keliatan beneran JSON atau HTML
 
     const dataA = await fetch(VENDOR_A).then(r => r.json());
     const dataB = await fetch(VENDOR_B).then(r => r.json());
