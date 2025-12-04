@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // URL Vendor ambil dari .env
-// const VENDOR_A = process.env.VENDOR_A;
+const VENDOR_A = process.env.VENDOR_A;
 const VENDOR_B = process.env.VENDOR_B;
 const VENDOR_C = process.env.VENDOR_C;
 
@@ -18,18 +18,18 @@ const VENDOR_C = process.env.VENDOR_C;
 // Contoh:
 // { kd_produk: "A001", nm_brg: "Kopi", hrg: "15000", ket_stok: "ada" }
 
-// function fromVendorA(item) {
-//   const hargaAsli = Number(item.hrg);
-//   const hargaDiskon = hargaAsli * 0.9; // diskon 10%
+function fromVendorA(item) {
+  const hargaAsli = Number(item.hrg);
+  const hargaDiskon = hargaAsli * 0.9; // diskon 10%
 
-//   return {
-//     id: item.kd_produk,
-//     nama: item.nm_brg,
-//     harga_final: Math.round(hargaDiskon),   // integer
-//     status: item.ket_stok === "ada" ? "Tersedia" : "Habis",
-//     sumber: "Vendor A"
-//   };
-// }
+  return {
+    id: item.kd_produk,
+    nama: item.nm_brg,
+    harga_final: Math.round(hargaDiskon),   // integer
+    status: item.ket_stok === "ada" ? "Tersedia" : "Habis",
+    sumber: "Vendor A"
+  };
+}
 
 // ==========================
 // 2. Normalisasi Vendor B
@@ -79,15 +79,15 @@ app.get("/products", async (req, res) => {
     // DEBUG – Cek apakah URL valid
     // =============================
     console.log("==== DEBUG VENDOR URL ====");
-    // console.log("VENDOR_A:", VENDOR_A);
+    console.log("VENDOR_A:", VENDOR_A);
     console.log("VENDOR_B:", VENDOR_B);
     console.log("VENDOR_C:", VENDOR_C);
 
-    // console.log("\n===== FETCH TEST VENDOR A =====");
-    // const resATest = await fetch(VENDOR_A);
-    // console.log("Status A:", resATest.status);
-    // const rawA = await resATest.text();
-    // console.log("Raw A:", rawA);
+    console.log("\n===== FETCH TEST VENDOR A =====");
+    const resATest = await fetch(VENDOR_A);
+    console.log("Status A:", resATest.status);
+    const rawA = await resATest.text();
+    console.log("Raw A:", rawA);
 
     console.log("\n===== FETCH TEST VENDOR B =====");
     const resBTest = await fetch(VENDOR_B);
@@ -101,15 +101,15 @@ app.get("/products", async (req, res) => {
     const rawC = await resCTest.text();
     console.log("Raw C:", rawC);
 
-    // const dataA = await fetch(VENDOR_A).then(r => r.json());
+    const dataA = await fetch(VENDOR_A).then(r => r.json());
     const dataB = await fetch(VENDOR_B).then(r => r.json());
     const dataC = await fetch(VENDOR_C).then(r => r.json());
 
-    // const hasilA = dataA.map(fromVendorA);
+    const hasilA = dataA.map(fromVendorA);
     const hasilB = dataB.map(fromVendorB);
     const hasilC = dataC.map(fromVendorC);
 
-    const finalData = [...hasilB, ...hasilC];
+    const finalData = [...hasilA, ...hasilB, ...hasilC];
 
     res.json(finalData);
   } catch (err) {
