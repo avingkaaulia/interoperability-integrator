@@ -109,7 +109,7 @@ app.get("/products", async (req, res) => {
     const hasilB = dataB.map(fromVendorB);
     const hasilC = dataC.map(fromVendorC);
 
-    const finalData = [...hasilA, ...hasilB, ...hasilC];
+    const finalData = [...hasilB, ...hasilC];
 
     res.json(finalData);
   } catch (err) {
