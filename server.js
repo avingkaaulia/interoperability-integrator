@@ -74,13 +74,32 @@ function fromVendorC(item) {
 
 app.get("/products", async (req, res) => {
   try {
-    // TEST: cek apakah ENV terbaca di Vercel
-    console.log("Fetch B:", VENDOR_B);
-    const resA = await fetch(VENDOR_B);
-    console.log("Status B:", resB.status);
+    
+    // =============================
+    // DEBUG – Cek apakah URL valid
+    // =============================
+    console.log("==== DEBUG VENDOR URL ====");
+    console.log("VENDOR_A:", VENDOR_A);
+    console.log("VENDOR_B:", VENDOR_B);
+    console.log("VENDOR_C:", VENDOR_C);
 
-    const textA = await resB.text();
-    console.log("Raw Text B:", textB); // => keliatan beneran JSON atau HTML
+    console.log("\n===== FETCH TEST VENDOR A =====");
+    const resATest = await fetch(VENDOR_A);
+    console.log("Status A:", resATest.status);
+    const rawA = await resATest.text();
+    console.log("Raw A:", rawA);
+
+    console.log("\n===== FETCH TEST VENDOR B =====");
+    const resBTest = await fetch(VENDOR_B);
+    console.log("Status B:", resBTest.status);
+    const rawB = await resBTest.text();
+    console.log("Raw B:", rawB);
+
+    console.log("\n===== FETCH TEST VENDOR C =====");
+    const resCTest = await fetch(VENDOR_C);
+    console.log("Status C:", resCTest.status);
+    const rawC = await resCTest.text();
+    console.log("Raw C:", rawC);
 
     const dataA = await fetch(VENDOR_A).then(r => r.json());
     const dataB = await fetch(VENDOR_B).then(r => r.json());
